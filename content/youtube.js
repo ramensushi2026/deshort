@@ -34,10 +34,10 @@ ytd-rich-section-renderer[is-shorts] {
   }
 
   function hideShortsNav() {
-    // Left nav entries to /shorts
+    // Left nav entry points to Shorts (YouTube sometimes uses /shorts or /feed/shorts)
     const links = Array.from(
       document.querySelectorAll(
-        "a[href^='/shorts'], a[href*='youtube.com/shorts']"
+        "a[href^='/shorts'], a[href^='/feed/shorts'], a[href*='youtube.com/shorts'], a[href*='youtube.com/feed/shorts']"
       )
     );
 
@@ -49,6 +49,22 @@ ytd-rich-section-renderer[is-shorts] {
         "yt-chip-cloud-chip-renderer",
       ]);
       if (entry) Cleaner.hide(entry);
+    }
+
+    // Fallback: hide guide entries whose label is Shorts (in case href is not present/changes)
+    const guideEntries = Array.from(
+      document.querySelectorAll(
+        "ytd-guide-entry-renderer, ytd-mini-guide-entry-renderer"
+      )
+    );
+
+    for (const entry of guideEntries) {
+      const labelEl =
+        entry.querySelector("yt-formatted-string") || entry.querySelector("#endpoint");
+      const label = Cleaner.text(labelEl) || Cleaner.text(entry);
+      if (Cleaner.includesAny(label, SHORTS_WORDS)) {
+        Cleaner.hide(entry);
+      }
     }
   }
 

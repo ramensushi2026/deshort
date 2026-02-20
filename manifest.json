@@ -3,7 +3,7 @@
   "name": "deshort",
   "short_name": "deshort",
   "homepage_url": "https://github.com/ramensushi2026/deshort",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Hide YouTube Shorts and Facebook Reels/short-video sections in feeds/listings (does not block direct links). Project: deshort.com",
   "host_permissions": [
     "*://www.youtube.com/*",
