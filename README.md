@@ -10,9 +10,7 @@ A lightweight browser extension that hides **YouTube Shorts** and **Facebook Ree
 1. Open `chrome://extensions/`
 2. Enable **Developer mode**
 3. Click **Load unpacked**
-4. Select this folder:
-
-   `/Users/ramen/code/deshort`
+4. Select the project folder (the one that contains `manifest.json`).
 
 5. Refresh YouTube / Facebook
 
