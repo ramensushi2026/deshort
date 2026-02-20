@@ -10,7 +10,7 @@ Chrome 安裝（Unpacked / 開發者模式）：
 2) 右上角開「Developer mode / 開發者模式」
 3) 按「Load unpacked / 載入未封裝項目」
 4) 揀呢個資料夾：
-   /Users/ramen/code/ramen-hide-shorts-reels-extension
+   /Users/ramen/code/deshort
 5) 之後開 YouTube / Facebook refresh 一下。
 
 Safari：
