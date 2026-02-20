@@ -1,0 +1,24 @@
+{
+  "manifest_version": 3,
+  "name": "deshort.com",
+  "version": "0.1.0",
+  "description": "Hide YouTube Shorts and Facebook Reels/short-video sections in feeds/listings (does not block direct links).",
+  "host_permissions": [
+    "*://www.youtube.com/*",
+    "*://m.youtube.com/*",
+    "*://www.facebook.com/*",
+    "*://m.facebook.com/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": ["*://www.youtube.com/*", "*://m.youtube.com/*"],
+      "js": ["content/common.js", "content/youtube.js"],
+      "run_at": "document_idle"
+    },
+    {
+      "matches": ["*://www.facebook.com/*", "*://m.facebook.com/*"],
+      "js": ["content/common.js", "content/facebook.js"],
+      "run_at": "document_idle"
+    }
+  ]
+}
