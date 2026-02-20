@@ -98,10 +98,47 @@ ytd-rich-section-renderer[is-shorts] {
     }
   }
 
+  function hideShortsInSearchResults() {
+    // On /results pages, Shorts items often link to /shorts/<id>.
+    // Hide any result card that contains such a link.
+    const shortsLinks = Array.from(
+      document.querySelectorAll(
+        "ytd-search a[href^='/shorts/'], ytd-search-results a[href^='/shorts/'], ytd-two-column-search-results-renderer a[href^='/shorts/']"
+      )
+    );
+
+    for (const a of shortsLinks) {
+      const card = Cleaner.closestAny(a, [
+        "ytd-video-renderer",
+        "ytd-reel-item-renderer",
+        "ytd-reel-shelf-renderer",
+        "ytd-rich-item-renderer",
+        "ytd-rich-section-renderer",
+        "ytd-item-section-renderer",
+      ]);
+      if (card) Cleaner.hide(card);
+    }
+
+    // Some search layouts render a Shorts shelf with a title.
+    // Our other shelf-hiding usually catches this, but keep an extra guard.
+    const headings = Array.from(
+      document.querySelectorAll(
+        "ytd-search #title, ytd-search-results #title, ytd-two-column-search-results-renderer #title"
+      )
+    );
+    for (const h of headings) {
+      const t = Cleaner.text(h);
+      if (Cleaner.includesAny(t, SHORTS_WORDS)) {
+        Cleaner.hideSectionAround(h);
+      }
+    }
+  }
+
   const run = Cleaner.debounce(() => {
     applyCss();
     hideShortsNav();
     hideShortsShelvesByTitle();
+    hideShortsInSearchResults();
   }, 250);
 
   // initial + dynamic
